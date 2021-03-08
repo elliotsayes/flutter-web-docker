@@ -7,7 +7,7 @@
 # To build iOS applications, a Mac development environment is necessary.
 #
 
-FROM debian:stretch
+FROM gcr.io/cloud-builders/gcloud
 MAINTAINER Chinmay Garde <chinmaygarde@google.com>
 
 # Install Dependencies.
@@ -18,13 +18,8 @@ RUN apt-get install -y \
   unzip \
   libc6
 
-# Set up new user
-RUN useradd -ms /bin/bash developer
-USER developer
-WORKDIR /home/developer
-
 # Install Flutter.
-ENV FLUTTER_ROOT="/home/developer/flutter"
+ENV FLUTTER_ROOT="/opt/flutter"
 RUN git clone https://github.com/flutter/flutter "${FLUTTER_ROOT}"
 ENV PATH="${FLUTTER_ROOT}/bin:${PATH}"
 
